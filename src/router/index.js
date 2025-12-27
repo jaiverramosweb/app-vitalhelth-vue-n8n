@@ -8,6 +8,8 @@ import ClinicaHeridas from '../views/ClinicaHeridas.vue'
 import HospitalizacionDomiciliaria from '../views/HospitalizacionDomiciliaria.vue'
 import Contacto from '../views/Contacto.vue'
 import DocumentosInteres from '../views/DocumentosInteres.vue'
+import AsociacionUsuarios from '../views/AsociacionUsuarios.vue'
+import TomaMuestras from '../views/TomaMuestras.vue'
 
 const routes = [
   {
@@ -54,6 +56,16 @@ const routes = [
     path: '/documentos-interes',
     name: 'DocumentosInteres',
     component: DocumentosInteres
+  },
+  {
+    path: '/asociacion-usuarios',
+    name: 'AsociacionUsuarios',
+    component: AsociacionUsuarios
+  },
+  {
+    path: '/toma-de-muestras',
+    name: 'TomaMuestras',
+    component: TomaMuestras
   }
 ]
 
