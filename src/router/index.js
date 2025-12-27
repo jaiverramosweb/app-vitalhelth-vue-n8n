@@ -10,6 +10,7 @@ import Contacto from '../views/Contacto.vue'
 import DocumentosInteres from '../views/DocumentosInteres.vue'
 import AsociacionUsuarios from '../views/AsociacionUsuarios.vue'
 import TomaMuestras from '../views/TomaMuestras.vue'
+import LavadoManos from '../views/LavadoManos.vue'
 
 const routes = [
   {
@@ -66,6 +67,11 @@ const routes = [
     path: '/toma-de-muestras',
     name: 'TomaMuestras',
     component: TomaMuestras
+  },
+  {
+    path: '/lavado-de-manos',
+    name: 'LavadoManos',
+    component: LavadoManos
   }
 ]
 

@@ -30,7 +30,7 @@ const blogPosts = ref([
   { id: 1, icon: 'fas fa-file-alt', title: 'Documentos de Interés', description: 'Estados financieros y documentación relevante para consulta.', route: '/documentos-interes' },
   { id: 2, icon: 'fas fa-users', title: 'Asociación de Usuarios', description: 'Te invitamos a hacer parte de nuestra asociación.', route: '/asociacion-usuarios' },
   { id: 3, icon: 'fas fa-vial', title: 'Toma de Muestras', description: 'Servicios de laboratorio clínico de alta calidad.', route: '/toma-de-muestras' },
-  { id: 4, icon: 'fas fa-hands-wash', title: 'Lavado de Manos', description: 'Protocolos y mejores prácticas de higiene.' }
+  { id: 4, icon: 'fas fa-hands-wash', title: 'Lavado de Manos', description: 'Protocolos y mejores prácticas de higiene.', route: '/lavado-de-manos' }
 ]);
 </script>
 
