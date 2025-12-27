@@ -1,0 +1,72 @@
+/* VARIABLES GLOBALES */
+:root {
+  --primary-blue: #0066FF;
+  --secondary-blue: #0052CC;
+  --light-blue: #E6F0FF;
+  --dark-text: #1A1A1A;
+  --gray-text: #666666;
+  --white: #FFFFFF;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: var(--dark-text);
+  overflow-x: hidden;
+}
+
+/* UTILIDADES REUTILIZABLES */
+.bg-gradient-blue {
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+}
+
+.text-primary {
+  color: var(--primary-blue) !important;
+}
+
+.btn-primary {
+  background-color: var(--primary-blue);
+  border: none;
+  transition: var(--transition);
+}
+
+.btn-primary:hover {
+  background-color: var(--secondary-blue);
+  transform: translateY(-2px);
+}
+
+/* ANIMACIONES (Indispensables para el Chatbot) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes typing {
+
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+
+  30% {
+    transform: translateY(-10px);
+  }
+}
+
+/* ESTILOS ESPECÍFICOS DEL CHATBOT (Si no los pusiste en el componente) */
+.typing-dots span {
+  width: 8px;
+  height: 8px;
+  background: var(--primary-blue);
+  border-radius: 50%;
+  display: inline-block;
+  animation: typing 1.4s infinite;
+}
