@@ -11,134 +11,134 @@ const isTyping = ref(false);
 const isSending = ref(false);
 const chatMessages = ref(null);
 
-const N8N_WEBHOOK_URL = 'https://devwebhookn8n.jaiverramos.tech/webhook/acce0f94-3fb3-42c3-bdba-05362e14a549';
+const N8N_WEBHOOK_URL = import.meta.env.VITE_N8N_WEBHOOK_URL;
 
 // Methods
 const toggleChatbot = () => {
-    chatbotOpen.value = !chatbotOpen.value;
+  chatbotOpen.value = !chatbotOpen.value;
 };
 
 const getCurrentTime = () => {
-    return new Date().toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
+  return new Date().toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
 };
 
 const getSessionId = () => {
-    let sessionId = localStorage.getItem('chatbot_session_id');
-    if (!sessionId) {
-        sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-        localStorage.setItem('chatbot_session_id', sessionId);
-    }
-    return sessionId;
+  let sessionId = localStorage.getItem('chatbot_session_id');
+  if (!sessionId) {
+    sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    localStorage.setItem('chatbot_session_id', sessionId);
+  }
+  return sessionId;
 };
 
 const addMessage = (text, sender) => {
-    const newMessage = {
-        id: Date.now(),
-        sender,
-        text,
-        time: getCurrentTime()
-    };
-    messages.value.push(newMessage);
+  const newMessage = {
+    id: Date.now(),
+    sender,
+    text,
+    time: getCurrentTime()
+  };
+  messages.value.push(newMessage);
 
-    nextTick(() => {
-        if (chatMessages.value) {
-            chatMessages.value.scrollTop = chatMessages.value.scrollHeight;
-        }
-    });
+  nextTick(() => {
+    if (chatMessages.value) {
+      chatMessages.value.scrollTop = chatMessages.value.scrollHeight;
+    }
+  });
 };
 
 const getFallbackResponse = (message) => {
-    const lowerMessage = message.toLowerCase();
-    if (lowerMessage.includes('servicio') || lowerMessage.includes('servicios')) {
-        return 'En Vital Health ofrecemos: Laboratorio Clínico, Administración de Medicamentos, Enfermería Particular, Clínica de Heridas y Hospitalización Domiciliaria. ¿Te gustaría saber más sobre alguno?';
-    }
-    if (lowerMessage.includes('ubicación') || lowerMessage.includes('dirección') || lowerMessage.includes('dónde')) {
-        return 'Estamos ubicados en Bogotá: Calle 31 # 13A – 51 ofc. 228. También tenemos sede en Girardot: Cra 7ª # 20 – 10 Local 104. ¿Necesitas más información?';
-    }
-    if (lowerMessage.includes('horario') || lowerMessage.includes('hora')) {
-        return 'Nuestros horarios son: Administrativo Lun-Vie 7:00AM - 5:00PM, Sábados 7:00AM - 12:00PM. Para servicios IPS: Lun-Vie 7:00AM - 6:00PM.';
-    }
-    if (lowerMessage.includes('teléfono') || lowerMessage.includes('contacto') || lowerMessage.includes('llamar')) {
-        return 'Puedes contactarnos al PBX: 601-9190092, Línea domiciliaria: 601-7420961 o por WhatsApp: +57 314 3544687. ¿En qué más puedo ayudarte?';
-    }
-    if (lowerMessage.includes('cita') || lowerMessage.includes('agendar')) {
-        return 'Para agendar una cita puedes llamarnos al 601-9190092 o escribirnos por WhatsApp al +57 314 3544687. ¿Necesitas algo más?';
-    }
-    return 'Gracias por tu mensaje. Para una mejor atención, puedes contactarnos al 601-9190092 o por WhatsApp al +57 314 3544687. ¿Hay algo más en lo que pueda ayudarte?';
+  const lowerMessage = message.toLowerCase();
+  if (lowerMessage.includes('servicio') || lowerMessage.includes('servicios')) {
+    return 'En Vital Health ofrecemos: Laboratorio Clínico, Administración de Medicamentos, Enfermería Particular, Clínica de Heridas y Hospitalización Domiciliaria. ¿Te gustaría saber más sobre alguno?';
+  }
+  if (lowerMessage.includes('ubicación') || lowerMessage.includes('dirección') || lowerMessage.includes('dónde')) {
+    return 'Estamos ubicados en Bogotá: Calle 31 # 13A – 51 ofc. 228. También tenemos sede en Girardot: Cra 7ª # 20 – 10 Local 104. ¿Necesitas más información?';
+  }
+  if (lowerMessage.includes('horario') || lowerMessage.includes('hora')) {
+    return 'Nuestros horarios son: Administrativo Lun-Vie 7:00AM - 5:00PM, Sábados 7:00AM - 12:00PM. Para servicios IPS: Lun-Vie 7:00AM - 6:00PM.';
+  }
+  if (lowerMessage.includes('teléfono') || lowerMessage.includes('contacto') || lowerMessage.includes('llamar')) {
+    return 'Puedes contactarnos al PBX: 601-9190092, Línea domiciliaria: 601-7420961 o por WhatsApp: +57 314 3544687. ¿En qué más puedo ayudarte?';
+  }
+  if (lowerMessage.includes('cita') || lowerMessage.includes('agendar')) {
+    return 'Para agendar una cita puedes llamarnos al 601-9190092 o escribirnos por WhatsApp al +57 314 3544687. ¿Necesitas algo más?';
+  }
+  return 'Gracias por tu mensaje. Para una mejor atención, puedes contactarnos al 601-9190092 o por WhatsApp al +57 314 3544687. ¿Hay algo más en lo que pueda ayudarte?';
 };
 
 const sendMessage = async () => {
-    const message = userInput.value.trim();
-    if (!message || isSending.value) return;
+  const message = userInput.value.trim();
+  if (!message || isSending.value) return;
 
-    addMessage(message, 'user');
-    userInput.value = '';
+  addMessage(message, 'user');
+  userInput.value = '';
 
-    isTyping.value = true;
-    isSending.value = true;
+  isTyping.value = true;
+  isSending.value = true;
 
-    try {
-        const response = await fetch(N8N_WEBHOOK_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                nombre: 'Usuario Web',
-                mensaje: message,
-                fecha: new Date().toISOString(),
-                sessionId: getSessionId()
-            })
-        });
+  try {
+    const response = await fetch(N8N_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nombre: 'Usuario Web',
+        mensaje: message,
+        fecha: new Date().toISOString(),
+        sessionId: getSessionId()
+      })
+    });
 
-        isTyping.value = false;
-        isSending.value = false;
+    isTyping.value = false;
+    isSending.value = false;
 
-        if (response.ok) {
-            const data = await response.json();
-            addMessage(data.response || data.message || '¡Mensaje enviado con éxito! Te contactaremos pronto.', 'bot');
-        } else {
-            throw new Error('Error en la respuesta del servidor');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        isTyping.value = false;
-        isSending.value = false;
-        addMessage(getFallbackResponse(message), 'bot');
+    if (response.ok) {
+      const data = await response.json();
+      addMessage(data.response || data.message || '¡Mensaje enviado con éxito! Te contactaremos pronto.', 'bot');
+    } else {
+      throw new Error('Error en la respuesta del servidor');
     }
+  } catch (error) {
+    console.error('Error:', error);
+    isTyping.value = false;
+    isSending.value = false;
+    addMessage(getFallbackResponse(message), 'bot');
+  }
 };
 
 const startConversation = async () => {
-    isStarting.value = true;
-    try {
-        const response = await fetch(N8N_WEBHOOK_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                action: 'start_conversation',
-                timestamp: new Date().toISOString(),
-                sessionId: getSessionId()
-            })
-        });
-        isStarting.value = false;
-        if (response.ok) {
-            const data = await response.json();
-            conversationStarted.value = true;
-            addMessage(
-                data.message || data.response || '¡Hola! Soy el asistente virtual de Vital Health. ¿En qué puedo ayudarte hoy?',
-                'bot'
-            );
-        } else {
-            throw new Error('Error al iniciar conversación');
-        }
-    } catch (error) {
-        console.error('Error starting conversation:', error);
-        isStarting.value = false;
-        conversationStarted.value = true;
-        addMessage('¡Hola! Soy el asistente virtual de Vital Health. ¿En qué puedo ayudarte hoy?', 'bot');
+  isStarting.value = true;
+  try {
+    const response = await fetch(N8N_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'start_conversation',
+        timestamp: new Date().toISOString(),
+        sessionId: getSessionId()
+      })
+    });
+    isStarting.value = false;
+    if (response.ok) {
+      const data = await response.json();
+      conversationStarted.value = true;
+      addMessage(
+        data.message || data.response || '¡Hola! Soy el asistente virtual de Vital Health. ¿En qué puedo ayudarte hoy?',
+        'bot'
+      );
+    } else {
+      throw new Error('Error al iniciar conversación');
     }
+  } catch (error) {
+    console.error('Error starting conversation:', error);
+    isStarting.value = false;
+    conversationStarted.value = true;
+    addMessage('¡Hola! Soy el asistente virtual de Vital Health. ¿En qué puedo ayudarte hoy?', 'bot');
+  }
 };
 
 const formatMessage = (message) => {
-    return message.replace(/\n/g, '<br>');
+  return message.replace(/\n/g, '<br>');
 };
 </script>
 
@@ -485,23 +485,37 @@ const formatMessage = (message) => {
   animation: typing 1s infinite ease-in-out;
 }
 
-.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
-.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
 
 @keyframes typing {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
 /* Scrollbar styling */
 .chatbot-messages::-webkit-scrollbar {
   width: 4px;
 }
+
 .chatbot-messages::-webkit-scrollbar-track {
   background: transparent;
 }
+
 .chatbot-messages::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
 </style>
