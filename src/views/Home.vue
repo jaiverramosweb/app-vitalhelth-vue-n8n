@@ -47,13 +47,14 @@ const blogPosts = ref([
             <p class="hero-subtitle">Somos un equipo enfocado en cubrir necesidades específicas en la rehabilitación y
               tratamiento.</p>
             <div class="hero-buttons">
-              <button class="btn btn-light">Fórmulas Médicas</button>
-              <button class="btn btn-outline-light">Consulta de Laboratorios</button>
+              <a href="https://isis.ipsvitalhealth.com/index.php/consulta_cliente" target="_blank"
+                class="btn btn-light">Fórmulas Médicas</a>
+              <a href="https://isis.ipsvitalhealth.com/index.php/consulta_cliente" target="_blank"
+                class="btn btn-outline-light">Consulta de Laboratorios</a>
             </div>
           </div>
           <div class="col-lg-6 text-center d-none d-lg-block hero-icon">
-            <img src="https://ipsvitalhealth.com/wp-content/uploads/2022/10/Hero-Img.png" alt="Profesional de salud"
-              class="img-fluid hero-image">
+            <img src="../assets/img/Hero-Img-doctora.png" alt="Profesional de salud" class="img-fluid hero-image">
           </div>
         </div>
       </div>
@@ -207,10 +208,10 @@ const blogPosts = ref([
 /* Hero Section */
 .hero-section {
   position: relative;
-  background: url('https://ipsvitalhealth.com/wp-content/uploads/2022/10/Hero-bg.png') center/cover no-repeat;
+  background: url('../assets/img/Hero-bg.png') center/cover no-repeat;
   background-color: #1e7bbd;
   color: white;
-  padding: 100px 0;
+  padding: 5px 0;
   overflow: hidden;
 }
 

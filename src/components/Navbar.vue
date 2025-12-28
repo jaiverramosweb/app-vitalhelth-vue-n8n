@@ -20,17 +20,7 @@ const scrollToSection = (sectionId) => {
   <nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <div class="container">
       <RouterLink class="navbar-brand vital-logo" to="/">
-        <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="30" cy="30" r="15" fill="#1e7bbd" />
-          <circle cx="70" cy="30" r="15" fill="#1e7bbd" />
-          <circle cx="30" cy="70" r="15" fill="#1e7bbd" />
-          <circle cx="70" cy="70" r="15" fill="#1e7bbd" />
-          <circle cx="50" cy="50" r="10" fill="#2c3e50" />
-        </svg>
-        <div class="logo-text">
-          <span class="logo-vital">VITAL</span>
-          <span class="logo-health">HEALTH</span>
-        </div>
+        <img src="../assets/img/VITAL-Logo.png" alt="Profesional de salud" class="img-fluid vital-logo">
       </RouterLink>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
@@ -38,10 +28,12 @@ const scrollToSection = (sectionId) => {
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item">
-            <RouterLink class="nav-link" :class="{ active: route.path === '/' && !route.hash }" to="/">Inicio</RouterLink>
+            <RouterLink class="nav-link" :class="{ active: route.path === '/' && !route.hash }" to="/">Inicio
+            </RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink class="nav-link" :class="{ active: route.path === '/nosotros' }" to="/nosotros">Nosotros</RouterLink>
+            <RouterLink class="nav-link" :class="{ active: route.path === '/nosotros' }" to="/nosotros">Nosotros
+            </RouterLink>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#" @click.prevent="scrollToSection('services')">Servicios</a>
@@ -50,7 +42,7 @@ const scrollToSection = (sectionId) => {
             <a class="nav-link" href="#" @click.prevent="scrollToSection('contact')">Contacto</a>
           </li>
           <li class="nav-item ms-lg-3">
-            <button class="btn btn-isis">ISIS Usuarios</button>
+            <a href="https://isis.ipsvitalhealth.com/" target="_blank" class="btn btn-isis">ISIS Usuarios</a>
           </li>
         </ul>
       </div>
@@ -70,6 +62,7 @@ const scrollToSection = (sectionId) => {
   align-items: center;
   gap: 10px;
   text-decoration: none;
+  width: 44%;
 }
 
 .logo-icon {
@@ -125,6 +118,11 @@ const scrollToSection = (sectionId) => {
   .nav-link {
     margin: 5px 0;
   }
+
+  .vital-logo {
+    width: 60%;
+  }
+
   .btn-isis {
     margin-top: 10px;
   }

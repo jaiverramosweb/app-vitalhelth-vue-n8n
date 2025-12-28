@@ -8,42 +8,34 @@ import { RouterLink } from 'vue-router'
       <div class="row g-4">
         <div class="col-lg-3">
           <div class="vital-logo mb-4">
-            <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="30" cy="30" r="15" fill="#1e7bbd" />
-              <circle cx="70" cy="30" r="15" fill="#1e7bbd" />
-              <circle cx="30" cy="70" r="15" fill="#1e7bbd" />
-              <circle cx="70" cy="70" r="15" fill="#1e7bbd" />
-              <circle cx="50" cy="50" r="10" fill="#ffffff" />
-            </svg>
-            <div class="logo-text">
-              <span class="logo-vital">VITAL</span>
-              <span style="color: white;">HEALTH</span>
-            </div>
+            <img src="../assets/img/VITAL-Logo.png" alt="Profesional de salud" class="img-fluid vital-logo">
           </div>
           <div class="certifications">
             <p class="mb-3">Certificaciones</p>
-            <i class="fas fa-certificate"></i>
-            <i class="fas fa-award ms-2"></i>
+            <img src="../assets/img/servicio-salud.png" alt="Profesional de salud" class="img-fluid certificate">
+            <img src="../assets/img/iso-9001.png" alt="Profesional de salud" class="img-fluid certificate2">
           </div>
         </div>
         <div class="col-lg-3">
           <h5>Servicios</h5>
           <ul>
-            <li><a href="#">Laboratorio Clínico</a></li>
-            <li><a href="#">Administración de Medicamentos</a></li>
-            <li><a href="#">Enfermería Particular</a></li>
-            <li><a href="#">Clínica de Heridas</a></li>
-            <li><a href="#">Hospitalización Domiciliaria</a></li>
+            <li><a href="/laboratorio-clinico">Laboratorio Clínico</a></li>
+            <li><a href="/administracion-de-medicamentos">Administración de Medicamentos</a></li>
+            <li><a href="/enfermeria-particular">Enfermería Particular</a></li>
+            <li><a href="/clinica-de-heridas">Clínica de Heridas</a></li>
+            <li><a href="/hospitalizacion-domiciliaria">Hospitalización Domiciliaria</a></li>
           </ul>
         </div>
         <div class="col-lg-3">
           <h5>Información</h5>
           <ul>
-            <li><RouterLink to="/nosotros">Derechos y Deberes</RouterLink></li>
-            <li><a href="#">Formulario PQRS</a></li>
-            <li><a href="#">Términos y Condiciones</a></li>
-            <li><a href="#">Login Zion</a></li>
-            <li><a href="#">Login ISIS</a></li>
+            <li>
+              <RouterLink to="/nosotros">Derechos y Deberes</RouterLink>
+            </li>
+            <li><a href="/contacto">Formulario PQRS</a></li>
+            <!-- <li><a href="/terminos-y-condiciones">Términos y Condiciones</a></li> -->
+            <!-- <li><a href="#">Login Zion</a></li>
+            <li><a href="#">Login ISIS</a></li> -->
           </ul>
         </div>
         <div class="col-lg-3">
@@ -56,7 +48,7 @@ import { RouterLink } from 'vue-router'
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2024 VITAL HEALTH | Todos los derechos reservados</p>
+        <p>&copy; 2021 VITAL HEALTH | Todos los derechos reservados</p>
       </div>
     </div>
   </footer>
@@ -67,7 +59,8 @@ import { RouterLink } from 'vue-router'
   background: #2c3e50;
   color: white;
   padding: 60px 0 30px;
-  margin-top: 0; /* Remove existing margin if any */
+  margin-top: 0;
+  /* Remove existing margin if any */
 }
 
 .footer h5 {
@@ -118,14 +111,18 @@ import { RouterLink } from 'vue-router'
 }
 
 .vital-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  width: 95%;
 }
 
-.logo-icon {
-  width: 45px;
-  height: 45px;
+.certificate {
+  width: 4rem;
+  height: 4rem;
+}
+
+.certificate2 {
+  width: 3rem;
+  margin-left: 1rem;
+  height: 4rem;
 }
 
 .logo-text {

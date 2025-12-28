@@ -2,15 +2,19 @@
 import { ref } from 'vue';
 
 const classifications = ref([
-  { id: 1, title: 'Hematología', icon: 'https://ipsvitalhealth.com/wp-content/uploads/2022/10/icon-1.png' },
-  { id: 2, title: 'Microbiología', icon: 'https://ipsvitalhealth.com/wp-content/uploads/2022/10/icon-1-1.png' },
-  { id: 3, title: 'Química Sanguínea', icon: 'https://ipsvitalhealth.com/wp-content/uploads/2022/10/icon-2.png' },
-  { id: 4, title: 'Inmunología', icon: 'https://ipsvitalhealth.com/wp-content/uploads/2022/10/icon-3-1.png' },
-  { id: 5, title: 'Pruebas Especiales', icon: 'https://ipsvitalhealth.com/wp-content/uploads/2022/10/icon-4-1.png' },
-  { id: 6, title: 'Uroanalisis', icon: 'https://ipsvitalhealth.com/wp-content/uploads/2022/10/icon-5.png' },
-  { id: 7, title: 'Coproanalisis', icon: 'https://ipsvitalhealth.com/wp-content/uploads/2022/10/icon-6.png' },
-  { id: 8, title: 'Toxicología', icon: 'https://ipsvitalhealth.com/wp-content/uploads/2022/10/icon-7.png' }
+  { id: 1, title: 'Hematología', icon: 'icon-1.png' },
+  { id: 2, title: 'Microbiología', icon: 'icon-1-1.png' },
+  { id: 3, title: 'Química Sanguínea', icon: 'icon-1.png' },
+  { id: 4, title: 'Inmunología', icon: 'icon-3-1.png' },
+  { id: 5, title: 'Pruebas Especiales', icon: 'icon-4-1.png' },
+  { id: 6, title: 'Uroanalisis', icon: 'icon-5.png' },
+  { id: 7, title: 'Coproanalisis', icon: 'icon-6.png' },
+  { id: 8, title: 'Toxicología', icon: 'icon-7.png' }
 ]);
+
+const getIconUrl = (name) => {
+  return new URL(`../assets/img/${name}`, import.meta.url).href;
+};
 
 const services = ref([
   'Recolección de muestra ambulatoria (IPS)',
@@ -36,8 +40,7 @@ const services = ref([
             <p class="hero-subtitle">Ayudas diagnósticas clínicas de alta calidad con eficiencia y confiabilidad.</p>
           </div>
           <div class="col-lg-6 hero-image-container">
-            <img src="https://ipsvitalhealth.com/wp-content/uploads/2022/10/image-50.png" alt="Toma de muestras"
-              class="img-fluid hero-image">
+            <img src="../assets/img/image-50.png" alt="Toma de muestras" class="img-fluid hero-image">
           </div>
         </div>
       </div>
@@ -61,8 +64,8 @@ const services = ref([
             </p>
           </div>
           <div class="col-lg-6 text-center">
-            <img src="https://ipsvitalhealth.com/wp-content/uploads/2022/10/rafiki-2.png" alt="Objetivo Laboratorio"
-              class="img-fluid floating-img" style="max-height: 400px;">
+            <img src="../assets/img/rafiki-2.png" alt="Objetivo Laboratorio" class="img-fluid floating-img"
+              style="max-height: 400px;">
           </div>
         </div>
       </div>
@@ -90,8 +93,8 @@ const services = ref([
           </div>
           <div class="col-lg-6 text-center">
             <div class="staff-image-wrapper">
-              <img src="https://ipsvitalhealth.com/wp-content/uploads/2022/10/image-61-1.png" alt="Personal Médico"
-                class="img-fluid rounded-4 shadow-lg">
+              <img src="../assets/img/Rectangle.jpg" alt="Objetivo Laboratorio" class="img-fluid floating-img"
+                style="max-height: 25rem;">
             </div>
           </div>
         </div>
@@ -109,7 +112,7 @@ const services = ref([
           <div v-for="item in classifications" :key="item.id" class="col-6 col-md-3">
             <div class="classification-card h-100 shadow-sm hover-lift">
               <div class="icon-wrapper mb-3">
-                <img :src="item.icon" :alt="item.title" class="class-icon">
+                <img :src="getIconUrl(item.icon)" :alt="item.title" class="class-icon">
               </div>
               <h5>{{ item.title }}</h5>
             </div>
@@ -156,9 +159,9 @@ const services = ref([
 /* Hero Section */
 .hero-section {
   position: relative;
-  background: url('https://smvital-health.com.co/wp-content/uploads/2022/10/Rectangle-148.jpg') center/cover no-repeat;
+  background: url('../assets/img/Rectangle.jpg') center/cover no-repeat;
   color: white;
-  padding: 120px 0;
+  /* padding: 120px 0; */
   overflow: hidden;
   min-height: 500px;
   display: flex;
@@ -200,23 +203,23 @@ const services = ref([
 
 .hero-image {
   max-width: 100%;
-  height: auto;
-  animation: float 6s ease-in-out infinite;
+  height: 31rem;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+  animation: fadeInRight 1s ease-out;
 }
 
-@keyframes float {
-  0% {
-    transform: translateY(0px);
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
   }
 
-  50% {
-    transform: translateY(-20px);
-  }
-
-  100% {
-    transform: translateY(0px);
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
+
 
 /* Section Title and Badge */
 .section-badge {

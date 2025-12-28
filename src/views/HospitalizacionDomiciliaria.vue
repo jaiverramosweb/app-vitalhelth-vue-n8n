@@ -2,12 +2,16 @@
 import { ref } from 'vue';
 
 const therapies = ref([
-  { title: 'Terapia Respiratoria', icon: 'https://ipsvitalhealth.com/wp-content/uploads/2022/10/icon-9.png' },
-  { title: 'Terapia Ocupacional', icon: 'https://ipsvitalhealth.com/wp-content/uploads/2022/10/icon-1-3.png' },
-  { title: 'Terapia de Lenguaje', icon: 'https://ipsvitalhealth.com/wp-content/uploads/2022/10/icon-2-2.png' },
-  { title: 'Terapia Física', icon: 'https://ipsvitalhealth.com/wp-content/uploads/2022/10/icon-4-2.png' },
-  { title: 'Clínica de Sueño', icon: 'https://ipsvitalhealth.com/wp-content/uploads/2022/10/icon-3-3.png' }
+  { title: 'Terapia Respiratoria', icon: 'icon-9.png' },
+  { title: 'Terapia Ocupacional', icon: 'icon-1-3.png' },
+  { title: 'Terapia de Lenguaje', icon: 'icon-2-2.png' },
+  { title: 'Terapia Física', icon: 'icon-4-2.png' },
+  { title: 'Clínica de Sueño', icon: 'icon-3-3.png' }
 ]);
+
+const getIconUrl = (name) => {
+  return new URL(`../assets/img/${name}`, import.meta.url).href;
+};
 
 const medicalServices = ref([
   'Egresos hospitalarios y consultas medias domiciliarias.',
@@ -45,8 +49,7 @@ const cities = ref([
             <p class="hero-subtitle">Acompañamiento médico permanente y profesional en la tranquilidad de su hogar.</p>
           </div>
           <div class="col-lg-6 hero-image-container text-center">
-            <img src="https://ipsvitalhealth.com/wp-content/uploads/2022/10/Hero-Img.png"
-              alt="Hospitalización Domiciliaria" class="img-fluid hero-image">
+            <img src="../assets/img/image-54.png" alt="Hospitalización Domiciliaria" class="img-fluid hero-image">
           </div>
         </div>
       </div>
@@ -75,8 +78,8 @@ const cities = ref([
       <div class="container py-4">
         <div class="row align-items-center">
           <div class="col-lg-6 mb-4 mb-lg-0 text-center">
-            <img src="https://ipsvitalhealth.com/wp-content/uploads/2022/10/rafiki-1.png" alt="Consulta Médica"
-              class="img-fluid floating-img" style="max-height: 400px;">
+            <img src="../assets/img/rafiki-1.png" alt="Consulta Médica" class="img-fluid floating-img"
+              style="max-height: 400px;">
           </div>
           <div class="col-lg-6">
             <div class="section-badge mb-3">Asistencia Médica</div>
@@ -97,8 +100,8 @@ const cities = ref([
       <div class="container py-4">
         <div class="row align-items-center flex-lg-row-reverse">
           <div class="col-lg-6 mb-4 mb-lg-0 text-center">
-            <img src="https://ipsvitalhealth.com/wp-content/uploads/2022/10/image-50.png" alt="Enfermería Profesional"
-              class="img-fluid rounded-4 shadow" style="max-height: 400px;">
+            <img src="../assets/img/image-50.png" alt="Enfermería Profesional" class="img-fluid rounded-4 shadow"
+              style="max-height: 400px;">
           </div>
           <div class="col-lg-6">
             <div class="section-badge mb-3">Cuidado Operativo</div>
@@ -126,7 +129,7 @@ const cities = ref([
           <div v-for="therapy in therapies" :key="therapy.title" class="col-6 col-md-4 col-lg-2">
             <div class="therapy-card text-center h-100 p-4 rounded-4">
               <div class="therapy-icon-wrapper mb-3">
-                <img :src="therapy.icon" :alt="therapy.title" class="therapy-icon">
+                <img :src="getIconUrl(therapy.icon)" :alt="therapy.title" class="therapy-icon">
               </div>
               <h6 class="fw-bold mb-0">{{ therapy.title }}</h6>
             </div>
@@ -140,8 +143,8 @@ const cities = ref([
       <div class="container py-4">
         <div class="row align-items-center">
           <div class="col-lg-6 mb-4 mb-lg-0 text-center">
-            <img src="https://ipsvitalhealth.com/wp-content/uploads/2022/10/rafiki-2-1.png" alt="Cobertura Vital Health"
-              class="img-fluid" style="max-height: 400px;">
+            <img src="../assets/img/rafiki-2-1.png" alt="Cobertura Vital Health" class="img-fluid"
+              style="max-height: 400px;">
           </div>
           <div class="col-lg-6">
             <div class="section-badge mb-3">Presencia Regional</div>
@@ -181,7 +184,7 @@ const cities = ref([
   position: relative;
   background-color: #f0f2f5;
   color: #333;
-  padding: 100px 0;
+  /* padding: 100px 0; */
   overflow: hidden;
   min-height: 500px;
   display: flex;
@@ -194,7 +197,7 @@ const cities = ref([
   left: 0;
   width: 100%;
   height: 200px;
-  background: url('https://ipsvitalhealth.com/wp-content/uploads/2022/10/Rectangle-148.jpg') center/cover no-repeat;
+  background: url('../assets/img/Rectangle.jpg') center/cover no-repeat;
   opacity: 0.1;
   z-index: 1;
 }
@@ -230,8 +233,21 @@ const cities = ref([
 
 .hero-image {
   max-width: 100%;
-  height: auto;
-  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.1));
+  height: 30rem;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));
+  animation: fadeInRight 1s ease-out;
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* Section Badges */
@@ -286,7 +302,7 @@ const cities = ref([
 
 .therapy-icon {
   max-height: 50px;
-  filter: brightness(0) invert(1);
+  /* filter: brightness(0) invert(1); */
 }
 
 /* Coverage Badges */
@@ -305,19 +321,6 @@ const cities = ref([
   animation: float 6s ease-in-out infinite;
 }
 
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-15px);
-  }
-
-  100% {
-    transform: translateY(0px);
-  }
-}
 
 @media (max-width: 991px) {
   .hero-section {

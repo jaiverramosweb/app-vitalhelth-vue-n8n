@@ -98,8 +98,8 @@ const diagnosticAids = ref([
         <div class="row align-items-center">
           <div class="col-lg-6 mb-4 mb-lg-0">
             <div class="d-flex align-items-center mb-3">
-              <img src="https://ipsvitalhealth.com/wp-content/uploads/2022/10/Clinica-de-heridas-Icon.png" alt="Icono"
-                class="me-3" style="width: 50px;">
+              <!-- <img src="https://ipsvitalhealth.com/wp-content/uploads/2022/10/Clinica-de-heridas-Icon.png" alt="Icono"
+                class="me-3" style="width: 50px;"> -->
               <div class="section-badge">Nuestro Objetivo</div>
             </div>
             <h2 class="section-title mb-4">Recuperación Integral Especializada</h2>
@@ -113,8 +113,8 @@ const diagnosticAids = ref([
             </p>
           </div>
           <div class="col-lg-6 text-center">
-            <img src="https://ipsvitalhealth.com/wp-content/uploads/2022/10/amico-2.png" alt="Ilustración Proceso"
-              class="img-fluid floating-img" style="max-height: 400px;">
+            <img src="../assets/img/amico-2.png" alt="Ilustración Proceso" class="img-fluid floating-img"
+              style="max-height: 400px;">
           </div>
         </div>
       </div>
@@ -197,8 +197,7 @@ const diagnosticAids = ref([
       <div class="container py-4">
         <div class="row align-items-center">
           <div class="col-lg-5 text-center mb-4 mb-lg-0">
-            <img src="https://ipsvitalhealth.com/wp-content/uploads/2022/10/image-61-1.png" alt="Ostomías"
-              class="img-fluid rounded-4 shadow">
+            <img src="../assets/img/Clinica-de-heridas-Icon.png" alt="Ostomías" class="img-fluid rounded-4 shadow">
           </div>
           <div class="col-lg-7">
             <div class="section-badge mb-3">Enfoque Especial en Ostomías</div>
@@ -310,9 +309,9 @@ const diagnosticAids = ref([
 /* Hero Section */
 .hero-section {
   position: relative;
-  background: url('https://smvital-health.com.co/wp-content/uploads/2022/10/Rectangle-148.jpg') center/cover no-repeat;
+  background: url('../assets/img/Rectangle.jpg') center/cover no-repeat;
   color: white;
-  padding: 120px 0;
+  /* padding: 120px 0; */
   overflow: hidden;
   min-height: 500px;
   display: flex;
@@ -354,8 +353,21 @@ const diagnosticAids = ref([
 
 .hero-image {
   max-width: 100%;
-  height: auto;
+  height: 30rem;
   filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));
+  animation: fadeInRight 1s ease-out;
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* Section Title and Badge */
@@ -431,20 +443,6 @@ const diagnosticAids = ref([
 /* Animation */
 .floating-img {
   animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-15px);
-  }
-
-  100% {
-    transform: translateY(0px);
-  }
 }
 
 @media (max-width: 991px) {

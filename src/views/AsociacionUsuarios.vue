@@ -31,7 +31,7 @@ const requirements = ref([
               derechos.
             </p>
             <div class="d-flex gap-3">
-              <a href="#requisitos" class="btn btn-primary-custom px-4 py-2 rounded-pill fw-bold">Ver Requisitos</a>
+              <!-- <a href="#requisitos" class="btn btn-primary-custom px-4 py-2 rounded-pill fw-bold">Ver Requisitos</a> -->
               <a href="https://ipsvitalhealth.com/wp-content/uploads/2023/12/CONVOCATORIA-ASOCIACION-DE-USUARIOS.pdf"
                 target="_blank" class="btn btn-outline-primary px-4 py-2 rounded-pill fw-bold">Descargar
                 Convocatoria</a>
@@ -39,8 +39,8 @@ const requirements = ref([
           </div>
           <div class="col-lg-5 text-center">
             <div class="hero-image-wrapper shadow-lg rounded-4 overflow-hidden border border-light">
-              <img src="https://ipsvitalhealth.com/wp-content/uploads/2023/04/Asociacion-de-usuario.png"
-                alt="Convocatoria Asociación de Usuarios" class="img-fluid">
+              <img src="../assets/img/Asociacion-de-usuario.png" alt="Convocatoria Asociación de Usuarios"
+                class="img-fluid">
             </div>
           </div>
         </div>

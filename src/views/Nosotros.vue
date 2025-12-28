@@ -161,7 +161,7 @@ const qualityObjectives = ref([
 /* Hero Section */
 .hero-section {
   position: relative;
-  background: url('https://ipsvitalhealth.com/wp-content/uploads/2022/10/Banner.png') center/cover no-repeat;
+  background: url('../assets/img/Banner-personas.png') center/cover no-repeat;
   color: white;
   padding: 120px 0;
   text-align: center;

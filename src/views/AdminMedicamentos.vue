@@ -26,8 +26,8 @@ const supplies = ref([
               domicilio.</p>
           </div>
           <div class="col-lg-6 hero-image-container">
-            <img src="https://ipsvitalhealth.com/wp-content/uploads/2022/10/Group-2608621.png"
-              alt="Administración de Medicamentos" class="img-fluid hero-image">
+            <img src="../assets/img/Group-2608621.png" alt="Administración de Medicamentos"
+              class="img-fluid hero-image">
           </div>
         </div>
       </div>
@@ -51,8 +51,8 @@ const supplies = ref([
             </p>
           </div>
           <div class="col-lg-6 text-center">
-            <img src="https://ipsvitalhealth.com/wp-content/uploads/2022/10/bro-2.png" alt="Objetivo Administración"
-              class="img-fluid floating-img" style="max-height: 400px;">
+            <img src="../assets/img/bro-2.png" alt="Objetivo Administración" class="img-fluid floating-img"
+              style="max-height: 400px;">
           </div>
         </div>
       </div>
@@ -86,8 +86,7 @@ const supplies = ref([
           </div>
           <div class="col-lg-6 text-center">
             <div class="staff-image-wrapper">
-              <img src="https://ipsvitalhealth.com/wp-content/uploads/2022/10/bro.png" alt="Equipo Médico"
-                class="img-fluid">
+              <img src="../assets/img/bro.png" alt="Equipo Médico" class="img-fluid">
             </div>
           </div>
         </div>
@@ -140,8 +139,7 @@ const supplies = ref([
           </div>
           <div class="col-lg-5 text-center mt-4 mt-lg-0">
             <div class="infra-images">
-              <img src="https://ipsvitalhealth.com/wp-content/uploads/2022/10/image-60.png" alt="Infraestructura 1"
-                class="img-fluid rounded-4 shadow mb-3">
+              <img src="../assets/img/Rectangle.jpg" alt="Infraestructura 1" class="img-fluid rounded-4 shadow mb-3">
             </div>
           </div>
         </div>
@@ -208,9 +206,9 @@ const supplies = ref([
 /* Hero Section */
 .hero-section {
   position: relative;
-  background: url('https://smvital-health.com.co/wp-content/uploads/2022/10/Rectangle-148.jpg') center/cover no-repeat;
+  background: url('../assets/img/Rectangle.jpg') center/cover no-repeat;
   color: white;
-  padding: 120px 0;
+  /* padding: 120px 0; */
   overflow: hidden;
   min-height: 500px;
   display: flex;
@@ -252,8 +250,21 @@ const supplies = ref([
 
 .hero-image {
   max-width: 100%;
-  height: auto;
-  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));
+  height: 30rem;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+  animation: fadeInRight 1s ease-out;
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* Section Decorators */
@@ -309,20 +320,6 @@ const supplies = ref([
 /* Animations */
 .floating-img {
   animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-15px);
-  }
-
-  100% {
-    transform: translateY(0px);
-  }
 }
 
 @media (max-width: 991px) {

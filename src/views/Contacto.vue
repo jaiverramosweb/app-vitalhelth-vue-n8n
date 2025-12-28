@@ -54,8 +54,7 @@ const handleFileUpload = (event) => {
           <p class="hero-sub-subtitle">Trabaja con Nosotros</p>
         </div>
         <div class="hero-image-wrapper">
-          <img src="https://ipsvitalhealth.com/wp-content/uploads/2022/10/image-56.png" alt="Equipo Vital Health"
-            class="img-fluid hero-team-image">
+          <img src="../assets/img/personas-2.png" alt="Equipo Vital Health" class="img-fluid hero-team-image">
         </div>
       </div>
     </section>
@@ -244,7 +243,7 @@ const handleFileUpload = (event) => {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('https://ipsvitalhealth.com/wp-content/uploads/2022/10/Frame-10.png') center top / contain no-repeat;
+  background: url('../assets/img/Frame-10.png') center top / contain no-repeat;
   opacity: 0.8;
   z-index: 1;
 }
@@ -280,7 +279,9 @@ const handleFileUpload = (event) => {
   width: 100%;
   position: relative;
   z-index: 2;
+  animation: fadeInRight 1s ease-out;
 }
+
 
 /* Tabs */
 .tab-btn {

@@ -171,7 +171,7 @@ const prevStep = () => {
   position: relative;
   background: url('https://smvital-health.com.co/wp-content/uploads/2022/10/Rectangle-148.jpg') center/cover no-repeat;
   color: white;
-  padding: 120px 0;
+  /* padding: 120px 0; */
   overflow: hidden;
   min-height: 500px;
   display: flex;
@@ -219,22 +219,9 @@ const prevStep = () => {
 
 .hero-image {
   max-width: 100%;
-  height: auto;
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-20px);
-  }
-
-  100% {
-    transform: translateY(0px);
-  }
+  height: 25rem;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));
+  animation: fadeInRight 1s ease-out;
 }
 
 .dot {

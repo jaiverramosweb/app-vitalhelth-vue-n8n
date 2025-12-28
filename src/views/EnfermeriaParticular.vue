@@ -5,28 +5,32 @@ const modalities = ref([
   {
     id: 1,
     title: 'Turnos de 8-12-24',
-    icon: 'https://ipsvitalhealth.com/wp-content/uploads/2022/10/icon-1-2.png',
+    icon: 'icon-1-2.png',
     description: 'Disponibilidad de personal para turnos adaptados a la necesidad del paciente.'
   },
   {
     id: 2,
     title: 'Cambio de Sondas',
-    icon: 'https://ipsvitalhealth.com/wp-content/uploads/2022/10/icon-8.png',
+    icon: 'icon-8.png',
     description: 'Procedimientos técnicos realizados por personal experto.'
   },
   {
     id: 3,
     title: 'Curaciones',
-    icon: 'https://ipsvitalhealth.com/wp-content/uploads/2022/10/icon-2-1.png',
+    icon: 'icon-2-1.png',
     description: 'Tratamiento especializado de heridas y curaciones post-operatorias.'
   },
   {
     id: 4,
     title: 'Suministro de Medicamentos',
-    icon: 'https://ipsvitalhealth.com/wp-content/uploads/2022/10/icon-3-2.png',
+    icon: 'icon-3-2.png',
     description: 'Administración segura bajo supervisión profesional.'
   }
 ]);
+
+const getIconUrl = (name) => {
+  return new URL(`../assets/img/${name}`, import.meta.url).href;
+};
 
 const activities = ref([
   'Técnicas de alimentación (sonda y vía oral)',
@@ -52,8 +56,7 @@ const activities = ref([
             </p>
           </div>
           <div class="col-lg-6 hero-image-container">
-            <img src="https://ipsvitalhealth.com/wp-content/uploads/2022/10/Hero-Img.png" alt="Enfermera Particular"
-              class="img-fluid hero-image">
+            <img src="../assets/img/Hero-Img-doctora.png" alt="Enfermera Particular" class="img-fluid hero-image">
           </div>
         </div>
       </div>
@@ -76,8 +79,8 @@ const activities = ref([
             </p>
           </div>
           <div class="col-lg-6 text-center">
-            <img src="https://ipsvitalhealth.com/wp-content/uploads/2022/10/amico-2-1.png" alt="Cuidado Profesional"
-              class="img-fluid floating-img" style="max-height: 400px;">
+            <img src="../assets/img/amico-2-1.png" alt="Cuidado Profesional" class="img-fluid floating-img"
+              style="max-height: 400px;">
           </div>
         </div>
       </div>
@@ -105,8 +108,7 @@ const activities = ref([
           </div>
           <div class="col-lg-6 text-center">
             <div class="activities-infographic">
-              <img src="https://ipsvitalhealth.com/wp-content/uploads/2022/10/image-61-1.png"
-                alt="Actividades de Enfermería" class="img-fluid rounded-4 shadow-lg">
+              <img src="../assets/img/bro.png" alt="Actividades de Enfermería" class="img-fluid rounded-4 shadow-lg">
             </div>
           </div>
         </div>
@@ -125,7 +127,7 @@ const activities = ref([
           <div v-for="modality in modalities" :key="modality.id" class="col-md-6 col-lg-3">
             <div class="modality-card h-100">
               <div class="modality-icon-bg mb-4">
-                <img :src="modality.icon" :alt="modality.title" class="modality-icon">
+                <img :src="getIconUrl(modality.icon)" :alt="modality.title" class="modality-icon">
               </div>
               <h5 class="fw-bold mb-3">{{ modality.title }}</h5>
               <p class="small opacity-80 mb-0">{{ modality.description }}</p>
@@ -176,9 +178,9 @@ const activities = ref([
 /* Hero Section */
 .hero-section {
   position: relative;
-  background: url('https://smvital-health.com.co/wp-content/uploads/2022/10/Rectangle-148.jpg') center/cover no-repeat;
+  background: url('../assets/img/Rectangle.jpg') center/cover no-repeat;
   color: white;
-  padding: 120px 0;
+  padding: 5px 0;
   overflow: hidden;
   min-height: 500px;
   display: flex;
@@ -222,7 +224,21 @@ const activities = ref([
   max-width: 100%;
   height: auto;
   filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));
+  animation: fadeInRight 1s ease-out;
 }
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 
 /* Badges */
 .section-badge {
@@ -303,20 +319,6 @@ const activities = ref([
 /* Animations */
 .floating-img {
   animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-15px);
-  }
-
-  100% {
-    transform: translateY(0px);
-  }
 }
 
 /* Contact Card */

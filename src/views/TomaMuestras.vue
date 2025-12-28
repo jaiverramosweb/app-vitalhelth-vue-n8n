@@ -47,8 +47,7 @@ const procedures = ref([
           </div>
           <div class="col-lg-6">
             <div class="hero-image-wrapper">
-              <img src="https://ipsvitalhealth.com/wp-content/uploads/2022/10/image-61-1.png" alt="Toma de Muestras"
-                class="img-fluid floating-animation">
+              <img src="../assets/img/rafiki-2.png" alt="Toma de Muestras" class="img-fluid floating-animation">
             </div>
           </div>
         </div>
@@ -98,9 +97,9 @@ const procedures = ref([
                 La publicación de resultados en línea se realiza usualmente en un tiempo de **3 a 7 días**, dependiendo
                 de la complejidad del examen.
               </p>
-              <a href="#" class="btn btn-light px-4 py-2 rounded-pill fw-bold text-primary-custom">
+              <!-- <a href="#" class="btn btn-light px-4 py-2 rounded-pill fw-bold text-primary-custom">
                 Consultar Resultados <i class="fas fa-external-link-alt ms-2"></i>
-              </a>
+              </a> -->
             </div>
           </div>
         </div>
@@ -129,20 +128,6 @@ const procedures = ref([
 
 .floating-animation {
   animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-20px);
-  }
-
-  100% {
-    transform: translateY(0px);
-  }
 }
 
 .service-card {
