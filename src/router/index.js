@@ -16,62 +16,74 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: { title: 'Inicio - Vital Health' }
   },
   {
     path: '/nosotros',
     name: 'Nosotros',
-    component: Nosotros
+    component: Nosotros,
+    meta: { title: 'Nosotros - Vital Health' }
   },
   {
     path: '/laboratorio-clinico',
     name: 'LaboratorioClinico',
-    component: LaboratorioClinico
+    component: LaboratorioClinico,
+    meta: { title: 'Laboratorio Clínico - Vital Health' }
   },
   {
     path: '/administracion-de-medicamentos',
     name: 'AdminMedicamentos',
-    component: AdminMedicamentos
+    component: AdminMedicamentos,
+    meta: { title: 'Administración de Medicamentos - Vital Health' }
   },
   {
     path: '/enfermeria-particular',
     name: 'EnfermeriaParticular',
-    component: EnfermeriaParticular
+    component: EnfermeriaParticular,
+    meta: { title: 'Enfermería Particular - Vital Health' }
   },
   {
     path: '/clinica-de-heridas',
     name: 'ClinicaHeridas',
-    component: ClinicaHeridas
+    component: ClinicaHeridas,
+    meta: { title: 'Clínica de Heridas - Vital Health' }
   },
   {
     path: '/hospitalizacion-domiciliaria',
     name: 'HospitalizacionDomiciliaria',
-    component: HospitalizacionDomiciliaria
+    component: HospitalizacionDomiciliaria,
+    meta: { title: 'Hospitalización Domiciliaria - Vital Health' }
   },
   {
     path: '/contacto',
     name: 'Contacto',
-    component: Contacto
+    component: Contacto,
+    meta: { title: 'Contacto - Vital Health' }
   },
   {
     path: '/documentos-interes',
     name: 'DocumentosInteres',
-    component: DocumentosInteres
+    component: DocumentosInteres,
+    meta: { title: 'Documentos de Interés - Vital Health' }
   },
   {
     path: '/asociacion-usuarios',
     name: 'AsociacionUsuarios',
-    component: AsociacionUsuarios
+    component: AsociacionUsuarios,
+    meta: { title: 'Asociación de Usuarios - Vital Health' }
   },
   {
     path: '/toma-de-muestras',
     name: 'TomaMuestras',
-    component: TomaMuestras
+    component: TomaMuestras,
+    meta: { title: 'Toma de Muestras - Vital Health' }
   },
   {
     path: '/lavado-de-manos',
     name: 'LavadoManos',
-    component: LavadoManos
+    component: LavadoManos,
+    meta: { title: 'Lavado de Manos - Vital Health' }
   }
 ]
 
@@ -83,6 +95,12 @@ const router = createRouter({
   scrollBehavior() {
     return { top: 0 }
   }
+})
+
+// Guardia de navegación para cambiar el título de la página dinámicamente
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title || 'Vital Health'
+  next()
 })
 
 export default router
