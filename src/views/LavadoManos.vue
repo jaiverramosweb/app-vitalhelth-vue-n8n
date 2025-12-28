@@ -169,7 +169,7 @@ const prevStep = () => {
 /* Hero Section */
 .hero-section {
   position: relative;
-  background: url('https://smvital-health.com.co/wp-content/uploads/2022/10/Rectangle-148.jpg') center/cover no-repeat;
+  background: url('../assets/img/Rectangle.jpg') center/cover no-repeat;
   color: white;
   /* padding: 120px 0; */
   overflow: hidden;
