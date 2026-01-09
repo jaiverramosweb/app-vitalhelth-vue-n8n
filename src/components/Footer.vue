@@ -33,6 +33,7 @@ import { RouterLink } from 'vue-router'
               <RouterLink to="/nosotros">Derechos y Deberes</RouterLink>
             </li>
             <li><a href="/contacto">Formulario PQRS</a></li>
+            <li><a href="/trabaja-con-nosotros">Formulario Trabaja con Nosotros</a></li>
             <!-- <li><a href="/terminos-y-condiciones">Términos y Condiciones</a></li> -->
             <!-- <li><a href="#">Login Zion</a></li>
             <li><a href="#">Login ISIS</a></li> -->

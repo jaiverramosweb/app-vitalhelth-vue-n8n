@@ -1,19 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 
-const activeTab = ref('pqrs');
-
-const pqrsForm = ref({
-  tipo: '',
-  nombres: '',
-  apellidos: '',
-  documento: '',
-  personaContacto: '',
-  email: '',
-  telefono: '',
-  comentarios: '',
-  datosReclamante: ''
-});
+const activeTab = ref('work');
 
 const workForm = ref({
   nombres: '',
@@ -26,11 +14,6 @@ const workForm = ref({
   comentarios: ''
 });
 
-const handlePqrsSubmit = () => {
-  // Placeholder for target URL submission
-  console.log('PQRS Form submitted:', pqrsForm.value);
-  alert('Formulario PQRS enviado (Simulación).');
-};
 
 const handleWorkSubmit = () => {
   // Placeholder for target URL submission
@@ -50,7 +33,7 @@ const handleFileUpload = (event) => {
       <div class="hero-bg-frame"></div>
       <div class="container hero-container">
         <div class="hero-text-content mb-4">
-          <h1 class="hero-main-title">Formulario de Contacto</h1>
+          <h1 class="hero-main-title">Trabaja con Nosotros</h1>
           <!-- <p class="hero-sub-subtitle">Trabaja con Nosotros</p> -->
         </div>
         <div class="hero-image-wrapper">
@@ -64,19 +47,19 @@ const handleFileUpload = (event) => {
       <div class="container py-4">
         <div class="form-tabs-wrapper shadow-lg rounded-4 overflow-hidden bg-white">
           <div class="tabs-header d-flex border-bottom">
-            <button @click="activeTab = 'pqrs'"
+            <!-- <button @click="activeTab = 'pqrs'"
               :class="['tab-btn flex-grow-1 border-0 py-3', { 'active': activeTab === 'pqrs' }]">
               PQRS (Peticiones, Quejas, Reclamos)
-            </button>
-            <!-- <button @click="activeTab = 'work'"
+            </button> -->
+            <button @click="activeTab = 'work'"
               :class="['tab-btn flex-grow-1 border-0 py-3', { 'active': activeTab === 'work' }]">
               Trabaja con Nosotros
-            </button> -->
+            </button>
           </div>
 
           <div class="tab-content p-4 p-md-5">
             <!-- PQRS Form -->
-            <div v-show="activeTab === 'pqrs'" class="animate-fade-in">
+            <!-- <div v-show="activeTab === 'pqrs'" class="animate-fade-in">
               <h3 class="mb-4 text-primary-custom fw-bold">Formulario de PQRS</h3>
               <form @submit.prevent="handlePqrsSubmit" class="row g-3">
                 <div class="col-md-12">
@@ -123,10 +106,10 @@ const handleFileUpload = (event) => {
                     Solicitud</button>
                 </div>
               </form>
-            </div>
+            </div> -->
 
             <!-- Recruitment Form -->
-            <!-- <div v-show="activeTab === 'work'" class="animate-fade-in">
+            <div v-show="activeTab === 'work'" class="animate-fade-in">
               <h3 class="mb-4 text-primary-custom fw-bold">Trabaja con Nosotros</h3>
               <form @submit.prevent="handleWorkSubmit" class="row g-3">
                 <div class="col-md-6">
@@ -162,7 +145,7 @@ const handleFileUpload = (event) => {
                     class="btn btn-primary-custom px-5 py-2 rounded-pill fw-bold">Postularme</button>
                 </div>
               </form>
-            </div> -->
+            </div>
           </div>
         </div>
       </div>

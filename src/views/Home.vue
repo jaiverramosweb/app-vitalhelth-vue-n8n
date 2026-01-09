@@ -11,7 +11,7 @@ const services = ref([
   { id: 3, icon: 'fas fa-user-nurse', title: 'Enfermería Particular', description: 'Personal de enfermería calificado para atención personalizada.', route: '/enfermeria-particular' },
   { id: 4, icon: 'fas fa-band-aid', title: 'Clínica de Heridas', description: 'Tratamiento especializado para el cuidado y curación de heridas.', route: '/clinica-de-heridas' },
   { id: 5, icon: 'fas fa-home', title: 'Hospitalización Domiciliaria', description: 'Atención hospitalaria en la comodidad de su hogar.', route: '/hospitalizacion-domiciliaria' },
-  { id: 6, icon: 'fas fa-phone-alt', title: 'Contacto', description: 'Estamos disponibles para atender sus consultas y necesidades.', route: '/contacto' }
+  { id: 6, icon: 'fas fa-home-alt', title: 'Terapias Domiciliarias', description: 'Atención domiciliaria para terapias.', route: '/terapias-domiciliarias' }
 ]);
 
 const navigateToService = (service) => {
@@ -161,8 +161,8 @@ const blogPosts = ref([
               </div>
 
               <div class="contact-links mt-4">
-                <button class="btn">Formulario PQRS</button>
-                <button class="btn">Trabaja con Nosotros</button>
+                <a href="/contacto" class="btn">Formulario PQRS</a>
+                <a href="/trabaja-con-nosotros" class="btn">Trabaja con Nosotros</a>
               </div>
             </div>
           </div>
@@ -192,8 +192,8 @@ const blogPosts = ref([
                 <i class="fas fa-clock"></i>
                 <div>
                   <strong>Horarios</strong>
-                  <p>Administrativo: Lun-Vie 7:00AM - 5:00PM<br>
-                    IPS: Lun-Vie 7:00AM - 6:00PM</p>
+                  <p>Administrativo: Lun-Vie 7:00AM - 5:00PM | Sáb: 7:00 AM - 12:00 M<br>
+                    IPS: Lun-Vie 7:00AM - 5:00PM | Sáb: 7:00 AM - 12:00 M</p>
                 </div>
               </div>
             </div>

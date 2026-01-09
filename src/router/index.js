@@ -6,11 +6,13 @@ import AdminMedicamentos from '../views/AdminMedicamentos.vue'
 import EnfermeriaParticular from '../views/EnfermeriaParticular.vue'
 import ClinicaHeridas from '../views/ClinicaHeridas.vue'
 import HospitalizacionDomiciliaria from '../views/HospitalizacionDomiciliaria.vue'
+import TerapiasDomiciliarias from '../views/TerapiasDomiciliarias.vue'
 import Contacto from '../views/Contacto.vue'
 import DocumentosInteres from '../views/DocumentosInteres.vue'
 import AsociacionUsuarios from '../views/AsociacionUsuarios.vue'
 import TomaMuestras from '../views/TomaMuestras.vue'
 import LavadoManos from '../views/LavadoManos.vue'
+import TrabajaConNosotros from '../views/TrabajaConNosotros.vue'
 
 const routes = [
   {
@@ -56,10 +58,22 @@ const routes = [
     meta: { title: 'Hospitalización Domiciliaria - Vital Health' }
   },
   {
+    path: '/terapias-domiciliarias',
+    name: 'TerapiasDomiciliarias',
+    component: TerapiasDomiciliarias,
+    meta: { title: 'Terapias Domiciliarias - Vital Health' }
+  },
+  {
     path: '/contacto',
     name: 'Contacto',
     component: Contacto,
     meta: { title: 'Contacto - Vital Health' }
+  },
+  {
+    path: '/trabaja-con-nosotros',
+    name: 'TrabajaConNosotros',
+    component: TrabajaConNosotros,
+    meta: { title: 'Trabaja con Nosotros - Vital Health' }
   },
   {
     path: '/documentos-interes',

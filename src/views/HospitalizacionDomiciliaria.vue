@@ -1,17 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 
-const therapies = ref([
-  { title: 'Terapia Respiratoria', icon: 'icon-9.png' },
-  { title: 'Terapia Ocupacional', icon: 'icon-1-3.png' },
-  { title: 'Terapia de Lenguaje', icon: 'icon-2-2.png' },
-  { title: 'Terapia Física', icon: 'icon-4-2.png' },
-  { title: 'Clínica de Sueño', icon: 'icon-3-3.png' }
-]);
 
-const getIconUrl = (name) => {
-  return new URL(`../assets/img/${name}`, import.meta.url).href;
-};
 
 const medicalServices = ref([
   'Egresos hospitalarios y consultas medias domiciliarias.',
@@ -30,10 +20,7 @@ const nursingServices = ref([
   'Entrenamiento en plan de enfermería para cuidadores.'
 ]);
 
-const cities = ref([
-  'Fusagasugá', 'Girardot', 'Melgar', 'Anapoima', 'La Mesa',
-  'Funza', 'Chía', 'Sopó', 'Mosquera', 'Zipaquirá', 'Facatativá', 'Cota'
-]);
+
 </script>
 
 <template>
@@ -117,51 +104,7 @@ const cities = ref([
       </div>
     </section>
 
-    <!-- Terapias Section -->
-    <section class="therapies-section py-5 bg-gradient-custom text-white">
-      <div class="container py-4">
-        <div class="text-center mb-5">
-          <div class="section-badge-light mb-3">Rehabilitación</div>
-          <h2 class="text-white fw-bold">Terapias Domiciliarias</h2>
-          <p class="opacity-75">Contamos con un equipo multidisciplinario para su recuperación integral.</p>
-        </div>
-        <div class="row g-4 justify-content-center">
-          <div v-for="therapy in therapies" :key="therapy.title" class="col-6 col-md-4 col-lg-2">
-            <div class="therapy-card text-center h-100 p-4 rounded-4">
-              <div class="therapy-icon-wrapper mb-3">
-                <img :src="getIconUrl(therapy.icon)" :alt="therapy.title" class="therapy-icon">
-              </div>
-              <h6 class="fw-bold mb-0">{{ therapy.title }}</h6>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Cobertura Section -->
-    <section class="coverage-section py-5">
-      <div class="container py-4">
-        <div class="row align-items-center">
-          <div class="col-lg-6 mb-4 mb-lg-0 text-center">
-            <img src="../assets/img/rafiki-2-1.png" alt="Cobertura Vital Health" class="img-fluid"
-              style="max-height: 400px;">
-          </div>
-          <div class="col-lg-6">
-            <div class="section-badge mb-3">Presencia Regional</div>
-            <h2 class="section-title mb-4">Amplia Cobertura</h2>
-            <p class="text-muted mb-4">
-              Servicios médicos Vital Health les ofrece una cobertura extendida en zonas aledañas para garantizar que la
-              salud llegue a cada rincón.
-            </p>
-            <div class="city-grid d-flex flex-wrap gap-2">
-              <span v-for="city in cities" :key="city" class="city-badge">
-                <i class="fas fa-map-marker-alt me-1"></i> {{ city }}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </div>
 </template>
 
