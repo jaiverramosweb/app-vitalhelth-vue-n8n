@@ -26,16 +26,73 @@ const workForm = ref({
   comentarios: ''
 });
 
-const handlePqrsSubmit = () => {
-  // Placeholder for target URL submission
-  console.log('PQRS Form submitted:', pqrsForm.value);
-  alert('Formulario PQRS enviado (Simulación).');
+const webhookUrl = 'http://localhost:8000/send_email.php';
+
+const handlePqrsSubmit = async () => {
+  try {
+    const formData = new FormData();
+    Object.keys(pqrsForm.value).forEach(key => {
+      formData.append(key, pqrsForm.value[key]);
+    });
+    formData.append('_subject', `Nueva solicitud PQRS: ${pqrsForm.value.tipo}`);
+
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      alert('Tu solicitud PQRS ha sido enviada con éxito.');
+      // Reset form
+      Object.keys(pqrsForm.value).forEach(key => {
+        pqrsForm.value[key] = '';
+      });
+    } else {
+      throw new Error('Error al enviar el formulario');
+    }
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    alert('Hubo un error al enviar tu solicitud. Por favor intenta de nuevo.');
+  }
 };
 
-const handleWorkSubmit = () => {
-  // Placeholder for target URL submission
-  console.log('Work Form submitted:', workForm.value);
-  alert('Formulario Trabaja con Nosotros enviado (Simulación).');
+const handleWorkSubmit = async () => {
+  try {
+    const formData = new FormData();
+    Object.keys(workForm.value).forEach(key => {
+      if (key === 'hv' && workForm.value[key]) {
+        formData.append('hv', workForm.value[key]);
+      } else {
+        formData.append(key, workForm.value[key]);
+      }
+    });
+    formData.append('_subject', `Nueva postulación desde Contacto: ${workForm.value.cargo}`);
+
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      alert('Tu postulación ha sido enviada con éxito.');
+      // Reset form
+      Object.keys(workForm.value).forEach(key => {
+        if (key === 'hv') workForm.value[key] = null;
+        else workForm.value[key] = '';
+      });
+    } else {
+      throw new Error('Error al enviar el formulario');
+    }
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    alert('Hubo un error al enviar tu postulación. Por favor intenta de nuevo.');
+  }
 };
 
 const handleFileUpload = (event) => {

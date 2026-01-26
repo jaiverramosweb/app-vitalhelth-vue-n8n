@@ -11,8 +11,6 @@ const isTyping = ref(false);
 const isSending = ref(false);
 const chatMessages = ref(null);
 
-const N8N_WEBHOOK_URL = import.meta.env.VITE_N8N_WEBHOOK_URL;
-
 // Methods
 const toggleChatbot = () => {
   chatbotOpen.value = !chatbotOpen.value;
@@ -78,7 +76,7 @@ const sendMessage = async () => {
   isSending.value = true;
 
   try {
-    const response = await fetch(N8N_WEBHOOK_URL, {
+    const response = await fetch("https://flow.pileo.io/webhook/acce0f94-3fb3-42c3-bdba-05362e14a549", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -109,7 +107,7 @@ const sendMessage = async () => {
 const startConversation = async () => {
   isStarting.value = true;
   try {
-    const response = await fetch(N8N_WEBHOOK_URL, {
+    const response = await fetch("https://flow.pileo.io/webhook/acce0f94-3fb3-42c3-bdba-05362e14a549", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -120,6 +118,7 @@ const startConversation = async () => {
     });
     isStarting.value = false;
     if (response.ok) {
+      console.log(response);
       const data = await response.json();
       conversationStarted.value = true;
       addMessage(

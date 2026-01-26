@@ -15,10 +15,46 @@ const workForm = ref({
 });
 
 
-const handleWorkSubmit = () => {
-  // Placeholder for target URL submission
-  console.log('Work Form submitted:', workForm.value);
-  alert('Formulario Trabaja con Nosotros enviado (Simulación).');
+const webhookUrl = '/send_email.php';
+
+const handleWorkSubmit = async () => {
+  try {
+    const formData = new FormData();
+    formData.append('nombres', workForm.value.nombres);
+    formData.append('apellidos', workForm.value.apellidos);
+    formData.append('email', workForm.value.email);
+    formData.append('telefonoFijo', workForm.value.telefonoFijo);
+    formData.append('celular', workForm.value.celular);
+    formData.append('cargo', workForm.value.cargo);
+    formData.append('comentarios', workForm.value.comentarios);
+    formData.append('_subject', `Nueva postulación: ${workForm.value.cargo}`);
+
+    if (workForm.value.hv) {
+      formData.append('hv', workForm.value.hv);
+    }
+
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      alert('Tu postulación ha sido enviada con éxito.');
+      // Reset form
+      Object.keys(workForm.value).forEach(key => {
+        if (key === 'hv') workForm.value[key] = null;
+        else workForm.value[key] = '';
+      });
+    } else {
+      throw new Error('Error al enviar el formulario');
+    }
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    alert('Hubo un error al enviar tu postulación. Por favor intenta de nuevo.');
+  }
 };
 
 const handleFileUpload = (event) => {

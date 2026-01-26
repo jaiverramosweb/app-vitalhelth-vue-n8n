@@ -1,0 +1,15 @@
+Subject: Nueva solicitud PQRS: peticion
+Headers: MIME-Version: 1.0
+From: Web Vital Health <no-reply@ipsvitalhealth.com>
+Reply-To: manuel@manuel.com
+Content-Type: multipart/mixed; boundary="1635ed8eaeae227429a302f388558561"
+
+
+--1635ed8eaeae227429a302f388558561
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+
+<h2>Detalles del Formulario</h2><table border='1' cellpadding='10' style='border-collapse: collapse; width: 100%;'><tr><td style='background-color: #f2f2f2; font-weight: bold;'>Tipo</td><td>peticion</td></tr><tr><td style='background-color: #f2f2f2; font-weight: bold;'>Nombres</td><td>Jaiver </td></tr><tr><td style='background-color: #f2f2f2; font-weight: bold;'>Apellidos</td><td>Ramos</td></tr><tr><td style='background-color: #f2f2f2; font-weight: bold;'>Documento</td><td>21351351351</td></tr><tr><td style='background-color: #f2f2f2; font-weight: bold;'>PersonaContacto</td><td></td></tr><tr><td style='background-color: #f2f2f2; font-weight: bold;'>Email</td><td>manuel@manuel.com</td></tr><tr><td style='background-color: #f2f2f2; font-weight: bold;'>Telefono</td><td>135135135135</td></tr><tr><td style='background-color: #f2f2f2; font-weight: bold;'>Comentarios</td><td>ayudame con esto</td></tr><tr><td style='background-color: #f2f2f2; font-weight: bold;'>DatosReclamante</td><td></td></tr></table>
+
+--1635ed8eaeae227429a302f388558561--
+==================================================
