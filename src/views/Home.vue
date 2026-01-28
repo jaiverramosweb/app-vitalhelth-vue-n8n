@@ -156,7 +156,7 @@ const blogPosts = ref([
                 <i class="fab fa-whatsapp"></i>
                 <div>
                   <strong>WhatsApp:</strong>
-                  <p>+57 314 3544687</p>
+                  <p>+57 310 2144102</p>
                 </div>
               </div>
 

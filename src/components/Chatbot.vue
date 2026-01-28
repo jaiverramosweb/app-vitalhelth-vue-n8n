@@ -30,10 +30,29 @@ const getSessionId = () => {
 };
 
 const addMessage = (text, sender) => {
+  const menuTrigger = 'Escribe MENÚ para volver.';
+  const solicitudTrigger = 'SOLICITUD';
+  let processedText = text;
+  let showMenuButton = false;
+  let showSolicitudButton = false;
+
+  if (sender === 'bot') {
+    if (text.includes(menuTrigger)) {
+      processedText = processedText.replace(menuTrigger, '').trim();
+      showMenuButton = true;
+    }
+    if (text.includes(solicitudTrigger)) {
+      processedText = processedText.replace(solicitudTrigger, '').trim();
+      showSolicitudButton = true;
+    }
+  }
+
   const newMessage = {
     id: Date.now(),
     sender,
-    text,
+    text: processedText,
+    showMenuButton,
+    showSolicitudButton,
     time: getCurrentTime()
   };
   messages.value.push(newMessage);
@@ -45,24 +64,190 @@ const addMessage = (text, sender) => {
   });
 };
 
-const getFallbackResponse = (message) => {
-  const lowerMessage = message.toLowerCase();
-  if (lowerMessage.includes('servicio') || lowerMessage.includes('servicios')) {
-    return 'En Vital Health ofrecemos: Laboratorio Clínico, Administración de Medicamentos, Enfermería Particular, Clínica de Heridas y Hospitalización Domiciliaria. ¿Te gustaría saber más sobre alguno?';
+const sendMenuCommand = () => {
+  userInput.value = 'MENÚ';
+  sendMessage();
+};
+
+const sendSolicitudCommand = () => {
+  userInput.value = 'SOLICITUD';
+  sendMessage();
+};
+
+const BOT_RESPONSES = {
+  menu: `Bienvenido a la IPS Vital Health 👋
+¿En qué te puedo ayudar?
+
+Por favor elige una opción escribiendo el número:
+
+1. Fórmulas y Órdenes Médicas
+2. Resultados de Laboratorio
+3. Solicitud de Historia Clínica
+4. MIPRES de Nutrición
+5. MIPRES de Pañal
+6. Traslados de Ambulancia
+7. Servicios Particulares
+8. Servicios a Prepagadas
+9. Otras Solicitudes
+
+Escribe MENÚ para volver aquí en cualquier momento.`,
+  1: `Fórmulas y Órdenes Médicas
+
+Para acceder tus fórmulas y ordenes médicas recientes, sigue estos pasos para realizar la descarga:
+
+1- Ingresa a la página web: https://ipsvitalhealth.com/
+2- Hacer clic en FÓRMULAS MÉDICAS
+3- Diligenciar los datos solicitados (documento, EPS y correo electrónico)
+4- Por último, deberá digitar el código que llegó a su correo electrónico para que así se despliegue las opciones y pueda realizar la descarga del soporte que necesita.
+
+Escribe MENÚ para volver.`,
+  2: `Resultados de Laboratorio
+
+Para acceder a tus resultados de laboratorio recientes, sigue estos pasos para realizar la descarga:
+1- Ingresa a la página web: https://ipsvitalhealth.com/ 
+2- Hacer clic en CONSULTA DE LABORATORIOS
+3- Diligenciar los datos solicitados (documento, EPS y correo electrónico)
+4- Por último, deberá digitar el código que llegó a su correo electrónico para que así se despliegue las opciones y pueda realizar la descarga del soporte que necesita.
+
+Escribe MENÚ para volver.`,
+  3: `Solicitud de Historia Clínica
+
+Para acceder a tu historia clínica debes realizar la solicitud a través de nuestro correo institucional smvitalhealth@gmail.com, para ello debe adjuntar los siguientes soportes:
+ 
+•Carta de solicitud de historia clínica.
+•Fotocopia del documento del paciente.
+•Fotocopia del documento del solicitante.
+
+Recuerda colocar en el asunto del correo “SOLICITUD DE HISTORIA CLÍNICA”, también, que tiene un tiempo de respuesta de 3 días hábiles.
+
+Tenga en cuenta que, la historia clínica es un documento privado, sometido a reserva, que únicamente puede revelarse a un tercero previa autorización del paciente o en los casos previstos por la ley.
+
+Escribe MENÚ para volver.`,
+  4: `MIPRES de Nutrición
+
+Las solicitudes de MIPRES de Nutrición  se realizan a través de nuestro correo institucional smvitalhealth@gmail.com, sin embargo, es importante que tengas en cuenta que:
+
+1- Este lo genera el nutricionista según su criterio.
+2- Una vez el profesional lo genera, este debe pasar por junta de profesionales y ésta tiene un tiempo de respuesta de unos 5 días hábiles.
+3- Terminada la junta, se envía el soporte de la  APROBACIÓN o NEGAGACIÓN de este al correo electrónico que tienes registrado en nuestra IPS.
+IMPORTANTE: una vez cuentes con este soporte aprobado debes validar con tu EPS tanto la autorización como el dispensador, ya que la IPS no dispensa suplementos.
+
+Escribe MENÚ para volver.`,
+  5: `MIPRES de Pañal
+
+Para acceder a tu MIPRES DE PAÑAL, debes validarlo con tu médico asignado y este bajo criterio puede generarlo. Si el profesional en la visita médica considera que si requieres dicho insumo, puedes  solicitar su envió inmediatamente al médico, ya que este tipo de MIPRES no requiere de junta de profesionales.
+
+Si el MIPRES de pañal no llega a tu correo, puedes solicitarlo a través de nuestro correo institucional smvitalhealth@gmail.com.
+
+IMPORTANTE: una vez cuentes con este soporte aprobado debes validar con tu EPS tanto la autorización como el proveedor que te realizará la entrega, ya que la IPS no realiza la gestión y entrega pañales.
+
+Escribe MENÚ para volver.`,
+  6: `Traslados de Ambulancia
+
+Para el traslado de ambulancia para citas ambulatorias, si eres del convenio COMPENSAR, debes validar con tu médico, este es quien determinará si requieres traslado de ambulancia o convencional.
+
+Si el traslado es convencional el profesional genera un MIPRES de transporte el cual pasa a junta de profesionales y posteriormente se enviará a tu correo registrado en la IPS, con el cual podrás gestionar a través de la EPS el desplazamiento.
+Si el profesional determina que el tipo de traslado es por AMBULANCIA, genera una orden medica en la atención, para ellos debes mostrar los soportes de tus citas asignadas.
+
+Si por el contrario eres del convenio Aliansalud, el proceso solo se realiza por medio de un MIPRES y el paciente y/o cuidador, es quien realiza la gestión.
+Ahora bien, si eres del convenio COMPENSAR y cuentas con una orden para traslado de ambulancia, haz clic en el siguiente botón:
+
+SOLICITUD
+
+Escribe MENÚ para volver.`,
+  SOLICITUD: `Para gestionar la solicitud de ambulancia, debes enviar un correo a smvitalhealth@gmail.com colocando en el asunto “TRASLADO DE AMBULANCIA” y diligenciando la siguiente plantilla:
+
+DOCUMENTO:
+NOMBRE DEL USUARIO:
+EDAD:
+FECHA TRASLADO:
+HORA DE LA CITA:
+OBSERVACIONES DE LA CITA :(Aquí indicar hora de contacto en el domicilio)
+SERVICIO AL QUE SE TRASLADA EL USUARIO:
+BARRIO Y/O MUNICIPIO DE DIRECCION DE ORIGEN :
+DIRECCION ORIGEN:
+DIRECCION DESTINO:BARRIO Y DIRECCION DESTINO:
+TELEFONOS DE CONTACTO:
+NOMBRE FAMILIAR / CUIDADOR RESPONSABLE:
+AGITACION PSICOMOTORA (Colocar si ó no):
+DOLOR CONTROLADO (Colocar si ó no):
+VENOCLISIS (Colocar si ó no):
+BOMBA INFUSION  (Colocar si ó no):
+GASTROSTOMIA  (Colocar si ó no):
+TRAQUEOSTOMIA  (Colocar si ó no):
+SOPORTE OXIGENO  (Colocar si ó no) - Colocar litraje y tiempo de uso:
+SILLA DE RUEDAS   (Colocar si ó no) y tipo de silla de ruedas (convencional o neurológica):
+TOLERA SEDENTE PROLONGADO  (Colocar si ó no):
+TUTOR EXTERNO  (Colocar si ó no):
+SOPORTE VENTILATORIO   (Colocar si ó no) - Informar tipo de soporte:
+
+Recuerda adjuntar la ordenes médicas y realizar tu solicitud 72 horas antes, también, que nosotros no prestamos este servicio, únicamente somos intermediarios, por lo que esta sujeto a la probación de tu EPS.
+
+Escribe MENÚ para volver.`,
+  7: `Servicios Particulares
+
+Si deseas un SERVICIO PARTICULAR, puedes cotizarlo a través de nuestro correo institucional smvitalhealth@gmail.com , adjuntando la orden médica y diligenciando la siguiente plantilla:
+
+Tipo de servicio (terapia/laboratorio/enfermería/etc.):
+Cantidad de sesiones:
+Nombre del paciente:  
+Número de documento:
+Fecha de nacimiento: 
+Dirección y barrio de residencia del paciente: 
+Teléfonos de contacto:
+Correo:
+Nombre del familiar y/o cuidador responsable del paciente: 
+
+Una vez contemos con esta información, validaremos la disponibilidad de profesional y te informaremos el costo del servicio, también, por correo te informaremos el estado de tu solicitud.
+
+Escribe MENÚ para volver.`,
+  8: `Servicios con Prepagadas
+
+Si deseas un SERVICIO con tu PREPAGADA, puedes gestionarlo y validar la disponibilidad a través de nuestro correo institucional smvitalhealth@gmail.com , adjuntando la orden médica y diligenciando la siguiente plantilla:
+
+Tipo de servicio (terapia/laboratorio/enfermería/etc.):
+Cantidad de sesiones:
+Nombre del paciente:  
+Número de documento:
+Fecha de nacimiento: 
+Dirección y barrio de residencia del paciente: 
+Teléfonos de contacto:
+Correo:
+Nombre del familiar y/o cuidador responsable del paciente: 
+
+Una vez contemos con esta información, validaremos la disponibilidad de profesional y te informaremos el estado de tu solicitud por el mismo medio.
+
+Escribe MENÚ para volver.`,
+  9: `Otras Solicitudes
+
+Para OTRAS SOLICITUDES, información, quejas y reclamos, puedes utilizar nuestros diferentes canales de atención:
+
+Correo electrónico: smvitalhealth@gmail.com
+
+Teléfonos:  601-9190092 / 601-7420961
+
+Horarios de atención: Lunes a Viernes: 7:00Am a 5:00Pm y  Sábados: 7:00Am a 12:00Pm.
+
+Somos su compañía cuando usted mas lo necesita.
+
+Escribe MENÚ para volver.`,
+  fallback: `No entendí tu solicitud.
+Por favor elige una opción del 1 al 9 o escribe MENÚ.`
+};
+
+const getLocalResponse = (input) => {
+  const normalized = input.trim().toUpperCase();
+  const greetings = ['HOLA', 'BUENOS DÍAS', 'BUENAS TARDES', 'HOLA, QUIERO INICIAR UNA CONVERSACIÓN'];
+
+  if (normalized === 'MENU' || normalized === 'MENÚ' || greetings.includes(normalized)) {
+    return BOT_RESPONSES.menu;
   }
-  if (lowerMessage.includes('ubicación') || lowerMessage.includes('dirección') || lowerMessage.includes('dónde')) {
-    return 'Estamos ubicados en Bogotá: Calle 31 # 13A – 51 ofc. 228. También tenemos sede en Girardot: Cra 7ª # 20 – 10 Local 104. ¿Necesitas más información?';
+
+  if (BOT_RESPONSES[normalized]) {
+    return BOT_RESPONSES[normalized];
   }
-  if (lowerMessage.includes('horario') || lowerMessage.includes('hora')) {
-    return 'Nuestros horarios son: Administrativo Lun-Vie 7:00AM - 5:00PM, Sábados 7:00AM - 12:00PM. Para servicios IPS: Lun-Vie 7:00AM - 6:00PM.';
-  }
-  if (lowerMessage.includes('teléfono') || lowerMessage.includes('contacto') || lowerMessage.includes('llamar')) {
-    return 'Puedes contactarnos al PBX: 601-9190092, Línea domiciliaria: 601-7420961 o por WhatsApp: +57 314 3544687. ¿En qué más puedo ayudarte?';
-  }
-  if (lowerMessage.includes('cita') || lowerMessage.includes('agendar')) {
-    return 'Para agendar una cita puedes llamarnos al 601-9190092 o escribirnos por WhatsApp al +57 314 3544687. ¿Necesitas algo más?';
-  }
-  return 'Gracias por tu mensaje. Para una mejor atención, puedes contactarnos al 601-9190092 o por WhatsApp al +57 314 3544687. ¿Hay algo más en lo que pueda ayudarte?';
+
+  return BOT_RESPONSES.fallback;
 };
 
 const sendMessage = async () => {
@@ -75,65 +260,23 @@ const sendMessage = async () => {
   isTyping.value = true;
   isSending.value = true;
 
-  try {
-    const response = await fetch("https://flow.pileo.io/webhook/acce0f94-3fb3-42c3-bdba-05362e14a549", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        nombre: 'Usuario Web',
-        mensaje: message,
-        fecha: new Date().toISOString(),
-        sessionId: getSessionId()
-      })
-    });
-
+  // Simulate network delay
+  setTimeout(() => {
+    const response = getLocalResponse(message);
     isTyping.value = false;
     isSending.value = false;
-
-    if (response.ok) {
-      const data = await response.json();
-      addMessage(data.response || data.message || '¡Mensaje enviado con éxito! Te contactaremos pronto.', 'bot');
-    } else {
-      throw new Error('Error en la respuesta del servidor');
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    isTyping.value = false;
-    isSending.value = false;
-    addMessage(getFallbackResponse(message), 'bot');
-  }
+    addMessage(response, 'bot');
+  }, 3000);
 };
 
 const startConversation = async () => {
   isStarting.value = true;
-  try {
-    const response = await fetch("https://flow.pileo.io/webhook/acce0f94-3fb3-42c3-bdba-05362e14a549", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        action: 'start_conversation',
-        timestamp: new Date().toISOString(),
-        sessionId: getSessionId()
-      })
-    });
-    isStarting.value = false;
-    if (response.ok) {
-      console.log(response);
-      const data = await response.json();
-      conversationStarted.value = true;
-      addMessage(
-        data.message || data.response || '¡Hola! Soy el asistente virtual de Vital Health. ¿En qué puedo ayudarte hoy?',
-        'bot'
-      );
-    } else {
-      throw new Error('Error al iniciar conversación');
-    }
-  } catch (error) {
-    console.error('Error starting conversation:', error);
+  // Simulate connection delay
+  setTimeout(() => {
     isStarting.value = false;
     conversationStarted.value = true;
-    addMessage('¡Hola! Soy el asistente virtual de Vital Health. ¿En qué puedo ayudarte hoy?', 'bot');
-  }
+    addMessage(BOT_RESPONSES.menu, 'bot');
+  }, 1500);
 };
 
 const formatMessage = (message) => {
@@ -186,7 +329,17 @@ const formatMessage = (message) => {
             <i class="fas fa-robot"></i>
           </div>
           <div class="message-content">
-            <p v-html="formatMessage(message.text)"></p>
+            <p v-if="message.text" v-html="formatMessage(message.text)"></p>
+            <div v-if="message.showMenuButton || message.showSolicitudButton" class="d-flex flex-column gap-2 mt-2">
+              <button v-if="message.showSolicitudButton" class="btn-menu-action" @click="sendSolicitudCommand"
+                :disabled="isSending">
+                <i class="fas fa-file-medical me-2"></i>Solicitud
+              </button>
+              <button v-if="message.showMenuButton" class="btn-menu-action" @click="sendMenuCommand"
+                :disabled="isSending">
+                <i class="fas fa-home me-2"></i> Volver al Menú
+              </button>
+            </div>
             <span class="message-time">{{ message.time }}</span>
           </div>
         </div>
@@ -502,6 +655,33 @@ const formatMessage = (message) => {
   50% {
     transform: translateY(-5px);
   }
+}
+
+.btn-menu-action {
+  background: #e8f4f8;
+  color: #1e7bbd;
+  border: 2px solid #1e7bbd;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px 0;
+  width: 100%;
+}
+
+.btn-menu-action:hover:not(:disabled) {
+  background: #1e7bbd;
+  color: white;
+}
+
+.btn-menu-action:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* Scrollbar styling */
