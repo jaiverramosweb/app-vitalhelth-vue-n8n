@@ -1,5 +1,7 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+
+const financialStatementsPdf = encodeURI(`${import.meta.env.BASE_URL}SMVH ESTADOS FINANCIEROS A DIC 2025 Y 2024.pdf`)
 </script>
 
 <template>
@@ -34,6 +36,11 @@ import { RouterLink } from 'vue-router'
             </li>
             <li><a href="/contacto">Formulario PQRS</a></li>
             <li><a href="/trabaja-con-nosotros">Formulario Trabaja con Nosotros</a></li>
+            <li>
+              <a :href="financialStatementsPdf" target="_blank" rel="noopener noreferrer">
+                Estados Financieros
+              </a>
+            </li>
             <!-- <li><a href="/terminos-y-condiciones">Términos y Condiciones</a></li> -->
             <!-- <li><a href="#">Login Zion</a></li>
             <li><a href="#">Login ISIS</a></li> -->
