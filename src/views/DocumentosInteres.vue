@@ -1,7 +1,19 @@
 <script setup>
 import { ref } from 'vue';
 
+const financialStatements2025Pdf = encodeURI(`${import.meta.env.BASE_URL}SMVH ESTADOS FINANCIEROS A DIC 2025 Y 2024.pdf`)
+
 const documentCategories = ref([
+  {
+    title: 'ESTADO FINANCIERO 2024 – 2025',
+    documents: [
+      {
+        name: 'SMVH ESTADOS FINANCIEROS A DIC 2025 Y 2024',
+        url: financialStatements2025Pdf,
+        icon: 'fas fa-file-invoice-dollar'
+      }
+    ]
+  },
   {
     title: 'ESTADO FINANCIERO 2022 – 2023',
     documents: [
