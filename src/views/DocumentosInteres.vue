@@ -1,7 +1,22 @@
 <script setup>
 import { ref } from 'vue';
 
+// Local PDFs live under public/ so Vite copies them into the build output.
+// BASE_URL keeps the path valid in both dev and production.
+const publicDoc = (path) => encodeURI(`${import.meta.env.BASE_URL}${path}`);
+const localDoc = (fileName) => publicDoc(`documentos/${fileName}`);
+
 const documentCategories = ref([
+  {
+    title: 'ESTADO FINANCIERO 2024 – 2025',
+    documents: [
+      {
+        name: 'SMVH ESTADOS FINANCIEROS A DIC 2025 Y 2024',
+        url: publicDoc('SMVH ESTADOS FINANCIEROS A DIC 2025 Y 2024.pdf'),
+        icon: 'fas fa-file-invoice-dollar'
+      }
+    ]
+  },
   {
     title: 'ESTADO FINANCIERO 2022 – 2023',
     documents: [
@@ -9,17 +24,6 @@ const documentCategories = ref([
         name: 'VITAL ESTADOS FINANCIEROS DIC 2023 COMPARAT CON DIC 2022 CON NOTAS',
         url: 'https://ipsvitalhealth.com/wp-content/uploads/2024/04/VITAL-ESTADOS-FINANCIEROS-DIC-2023-COMPARAT-CON-DIC-2022-CON-NOTAS.pdf',
         icon: 'fas fa-file-invoice-dollar'
-      }
-    ]
-  },
-  {
-    title: 'Seguridad del Paciente',
-    description: 'Folleto seguridad del paciente.',
-    documents: [
-      {
-        name: '2. SEGURIDAD DEL PACIENTE',
-        url: 'https://ipsvitalhealth.com/wp-content/uploads/2024/08/2.-SEGURIDAD-DEL-PACIENTE.pdf',
-        icon: 'fas fa-user-shield'
       }
     ]
   },
@@ -34,12 +38,43 @@ const documentCategories = ref([
     ]
   },
   {
+    title: 'Seguridad del Paciente',
+    description: 'Folleto seguridad del paciente.',
+    documents: [
+      {
+        name: 'Seguridad del paciente',
+        url: localDoc('seguridad-del-paciente.pdf'),
+        icon: 'fas fa-user-shield'
+      }
+    ]
+  },
+  {
+    title: 'Uso Responsable de Medicamentos y Antibióticos',
+    documents: [
+      {
+        name: 'Uso responsable de medicamentos y antibióticos',
+        url: localDoc('uso-responsable-medicamentos-antibioticos.pdf'),
+        icon: 'fas fa-prescription-bottle-alt'
+      }
+    ]
+  },
+  {
     title: 'Asesoría Farmacológica',
     documents: [
       {
         name: 'Asesoría farmacológica',
-        url: 'https://ipsvitalhealth.com/wp-content/uploads/2025/01/Asesoria-farmacologica.pdf',
+        url: localDoc('asesoria-farmacologica.pdf'),
         icon: 'fas fa-mortar-pestle'
+      }
+    ]
+  },
+  {
+    title: 'Bioseguridad',
+    documents: [
+      {
+        name: 'Bioseguridad - Infografía',
+        url: localDoc('bioseguridad-infografia.pdf'),
+        icon: 'fas fa-shield-virus'
       }
     ]
   }
@@ -74,7 +109,7 @@ const documentCategories = ref([
               <p v-if="category.description" class="text-muted small mb-3">{{ category.description }}</p>
 
               <div class="document-list">
-                <a v-for="(doc, docIndex) in category.documents" :key="docIndex" :href="doc.url" target="_blank"
+                <a v-for="(doc, docIndex) in category.documents" :key="docIndex" :href="doc.url" target="_blank" rel="noopener noreferrer"
                   class="document-link d-flex align-items-center p-3 rounded-3 text-decoration-none mb-2">
                   <div class="doc-icon me-3">
                     <i :class="doc.icon" class="fa-lg"></i>
